@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quotations/core/services/navigation.dart';
+import 'package:quotations/core/theme/theme.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(ProviderScope(
+      child: const MyApp(),
+    ));
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+      title: 'Quotations',
+      theme: themeData,
+      home: Navigator(
+        pages: ref.watch(navigatorProvider).backstack,
+        onPopPage: (route, result) {
+          route.didPop(result);
+          return ref.watch(navigatorProvider).pop();
+        },
       ),
     );
   }
