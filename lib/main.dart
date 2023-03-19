@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotations/core/services/navigation.dart';
 import 'package:quotations/core/theme/theme.dart';
 
-void main() => runApp(ProviderScope(
+void main() {
+  runApp(ProviderScope(
       child: const MyApp(),
     ));
+}
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -16,10 +18,10 @@ class MyApp extends ConsumerWidget {
       title: 'Quotations',
       theme: themeData,
       home: Navigator(
-        pages: ref.watch(navigatorProvider).backstack,
+        pages: ref.watch(navigationProvider),
         onPopPage: (route, result) {
           route.didPop(result);
-          return ref.watch(navigatorProvider).pop();
+          return ref.watch(navigationProvider.notifier).pop();
         },
       ),
     );

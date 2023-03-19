@@ -14,6 +14,7 @@ var themeData = ThemeData(
       selectionColor: primaryColor.withOpacity(0.25),
       selectionHandleColor: primaryColor),
   inputDecorationTheme: InputDecorationTheme(
+    border: OutlineInputBorder(),
     focusedErrorBorder:
         OutlineInputBorder(borderSide: BorderSide(color: errorColor, width: 2)),
     errorBorder: OutlineInputBorder(borderSide: BorderSide(color: errorColor)),
