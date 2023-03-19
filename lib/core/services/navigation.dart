@@ -1,41 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotations/core/routes/routes.dart';
+import 'package:quotations/modules/quotations/submodules/create_quotation/providers/create_customer_provider.dart';
+import 'package:quotations/modules/quotations/submodules/create_quotation/providers/create_quotation_provider.dart';
 
-abstract class NavigatorInterface {
+abstract class NavigationInterface {
   bool pop();
   void _setStack(List<MaterialPage> stack);
   void goToPage(MaterialPage page);
 }
 
-class NavigatorProvider extends ChangeNotifier implements NavigatorInterface {
-  List<MaterialPage> backstack = [createQuotationPage]; // current stack
-
+class NavigationProvider extends Notifier<List<MaterialPage>>
+    implements NavigationInterface {
   @override
   bool pop() {
-    if (backstack != [quotationListPage]) {
-      _setStack([...backstack..removeLast()]);
+    if (state != [quotationListPage]) {
+      if (state.last == createQuotationPage) {
+        ref.read(createQuotationProvider.notifier).clear();
+      } else if (state.last == createCustomerPage) {
+        ref.read(createCustomerProvider.notifier).clear();
+      }
+      _setStack([...state..removeLast()]);
     }
-    return backstack.length == 1;
+    return state.length == 1;
   }
 
   @override
   void _setStack(List<MaterialPage> stack) {
-    if (stack != backstack) {
-      backstack = stack;
-      notifyListeners();
+    if (stack != state) {
+      state = stack;
     }
   }
 
   @override
   void goToPage(MaterialPage page) {
-    if (!backstack.contains(page)) {
-      _setStack([...backstack, page]);
+    if (!state.contains(page)) {
+      _setStack([...state, page]);
     }
   }
 
+  @override
+  List<MaterialPage> build() {
+    state = [quotationListPage];
+    return state;
+  }
 }
 
-final navigatorProvider = ChangeNotifierProvider<NavigatorProvider>((ref) {
-  return NavigatorProvider();
+final navigationProvider =
+    NotifierProvider<NavigationProvider, List<MaterialPage>>(() {
+  return NavigationProvider();
 });
