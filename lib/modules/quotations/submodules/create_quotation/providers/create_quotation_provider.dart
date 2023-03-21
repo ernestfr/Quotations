@@ -4,7 +4,7 @@ import 'package:quotations/core/enums/box_type.dart';
 import 'package:quotations/core/routes/routes.dart';
 import 'package:quotations/core/services/image_service.dart';
 import 'package:quotations/core/services/local_database_service.dart';
-import 'package:quotations/core/services/navigation.dart';
+import 'package:quotations/core/services/navigation_service.dart';
 import 'package:quotations/modules/quotations/models/customer.dart';
 import 'package:quotations/modules/quotations/models/line_item.dart';
 import 'package:quotations/modules/quotations/models/quotation.dart';

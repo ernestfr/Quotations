@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotations/core/components/custom_appbar.dart';
 import 'package:quotations/core/routes/routes.dart';
-import 'package:quotations/core/services/navigation.dart';
 
 class QuotationImage extends ConsumerWidget {
   const QuotationImage({
@@ -16,6 +15,7 @@ class QuotationImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    var navigationProvider;
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: InkWell(

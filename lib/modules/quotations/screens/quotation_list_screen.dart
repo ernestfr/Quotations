@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotations/core/components/custom_appbar.dart';
 import 'package:quotations/core/routes/routes.dart';
-import 'package:quotations/core/services/navigation.dart';
+import 'package:quotations/core/services/navigation_service.dart';
 import 'package:quotations/modules/quotations/components/quotation_card.dart';
 import 'package:quotations/modules/quotations/providers/quotations_provider.dart';
 

@@ -30,7 +30,7 @@ flutter:
 
   uses-material-design: true
 
-  assets:
+
   fonts:
     - family: WorkSans
       fonts:

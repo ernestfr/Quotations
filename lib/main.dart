@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quotations/core/services/navigation.dart';
+import 'package:quotations/core/services/navigation_service.dart';
 import 'package:quotations/core/theme/theme.dart';
 
 void main() {
