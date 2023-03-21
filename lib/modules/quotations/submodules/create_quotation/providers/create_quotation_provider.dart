@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotations/core/enums/box_type.dart';
 import 'package:quotations/core/routes/routes.dart';
+import 'package:quotations/core/services/image_service.dart';
 import 'package:quotations/core/services/local_database_service.dart';
 import 'package:quotations/core/services/navigation.dart';
 import 'package:quotations/modules/quotations/models/customer.dart';
@@ -32,6 +33,17 @@ class CreateQuotationProvider extends Notifier<CreateQuotationState> {
 
   goToCreateCustomer() async {
     ref.read(navigationProvider.notifier).goToPage(createCustomerPage);
+  }
+
+  addImage() async {
+    String imageName = await ref.read(imageService).pickImage();
+    if (imageName == "error") {
+      return;
+    }
+    List<String> images = state.quotation.images;
+    images.add(imageName);
+    Quotation quotation = state.quotation.copyWith(images: images);
+    state = state.copyWith(quotation: quotation);
   }
 
   goToAddLineItem() {
