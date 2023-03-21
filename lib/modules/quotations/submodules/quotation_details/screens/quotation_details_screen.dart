@@ -21,7 +21,9 @@ class QuotationDetailsScreen extends StatelessWidget {
           CustomerInfoPanel(
             quotation: quotation,
           ),
-          ImagesListPanel(),
+          ImagesListPanel(
+            quotation: quotation,
+          ),
           QuotationInfoPanel(
             quotation: quotation,
           ),
