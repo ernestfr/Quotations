@@ -1,10 +1,10 @@
 import 'package:data_class_plugin/data_class_plugin.dart';
 import 'package:hive/hive.dart';
 import 'package:quotations/modules/quotations/models/customer.dart';
-import 'package:quotations/modules/quotations/models/image_model.dart';
 import 'package:quotations/modules/quotations/models/line_item.dart';
 part 'quotation.g.dart';
 
+@DataClass()
 @HiveType(typeId: 1)
 class Quotation extends HiveObject {
   @HiveField(0)
@@ -14,11 +14,12 @@ class Quotation extends HiveObject {
   @HiveField(2)
   final List<LineItem> lineItems;
   @HiveField(3)
-  final List<ImageModel> images;
+  final List<String> images;
 
+  /// Shorthand constructor
   Quotation({
     required this.title,
-    required this.customer,
+    this.customer,
     required this.lineItems,
     required this.images,
   });
@@ -79,7 +80,7 @@ class Quotation extends HiveObject {
     final String? title,
     final Customer? customer,
     final List<LineItem>? lineItems,
-    final List<ImageModel>? images,
+    final List<String>? images,
   }) {
     return Quotation(
       title: title ?? this.title,

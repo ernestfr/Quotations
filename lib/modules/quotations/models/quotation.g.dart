@@ -20,7 +20,7 @@ class QuotationAdapter extends TypeAdapter<Quotation> {
       title: fields[0] as String,
       customer: fields[1] as Customer?,
       lineItems: (fields[2] as List).cast<LineItem>(),
-      images: (fields[3] as List).cast<ImageModel>(),
+      images: (fields[3] as List).cast<String>(),
     );
   }
 

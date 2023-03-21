@@ -4,14 +4,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:quotations/core/enums/box_type.dart';
 import 'package:quotations/modules/quotations/models/address.dart';
 import 'package:quotations/modules/quotations/models/customer.dart';
-import 'package:quotations/modules/quotations/models/image_model.dart';
 import 'package:quotations/modules/quotations/models/line_item.dart';
 import 'package:quotations/modules/quotations/models/quotation.dart';
 
 abstract class LocalDatabaseServiceInterface {
   void initialize();
   Future<Map> read({required BoxType type});
-  Future<bool> create(Object object, {required BoxType type});
+  create(Object object, {required BoxType type});
   Future<bool> clear(List<BoxType> types);
 }
 
@@ -30,7 +29,7 @@ class HiveLocalDatabaseService implements LocalDatabaseServiceInterface {
   }
 
   @override
-  Future<bool> create(Object object, {required BoxType type}) async {
+  create(Object object, {required BoxType type}) async {
     try {
       Box box = await _openHiveBox(type.string);
       await box.add(object);
@@ -48,7 +47,6 @@ class HiveLocalDatabaseService implements LocalDatabaseServiceInterface {
   _registerHiveAdapters() {
     Hive.registerAdapter(QuotationAdapter());
     Hive.registerAdapter(AddressAdapter());
-    Hive.registerAdapter(ImageModelAdapter());
     Hive.registerAdapter(CustomerAdapter());
     Hive.registerAdapter(LineItemAdapter());
   }
